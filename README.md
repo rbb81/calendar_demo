@@ -1,3 +1,29 @@
+# Prerequisites
+
+Ensure you have Node.js version 18 installed. You can download it from [Node.js official website](https://nodejs.org/en).
+
+# Installation
+
+Follow these steps to set up the project:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/rbb81/calendar_demo.git
+    cd calendar_demo
+    ```
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+# Running the Project
+
+To start the development server, run:
+    ```bash
+    npm install
+    ```
+The development server should now be running, and you can view your project in the browser.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
