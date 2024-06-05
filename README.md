@@ -20,7 +20,7 @@ Follow these steps to set up the project:
 
 To start the development server, run:
     ```bash
-    npm install
+    npm run dev
     ```
 The development server should now be running, and you can view your project in the browser.
 
