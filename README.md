@@ -22,6 +22,7 @@ To start the development server, run:
     ```bash
     npm run dev
     ```
+
 The development server should now be running, and you can view your project in the browser.
 
 # React + TypeScript + Vite
