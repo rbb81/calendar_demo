@@ -19,7 +19,7 @@ Follow these steps to set up the project:
 # Running the Project
 
 To start the development server, run:
-    ```bash
+    ```
     npm run dev
     ```
 
