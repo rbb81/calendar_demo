@@ -7,4 +7,5 @@ export default defineConfig({
   server: {
     open: true, // This will automatically open the browser
   },
+  base: "/calendar_demo/",
 });
