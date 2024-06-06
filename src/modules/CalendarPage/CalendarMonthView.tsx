@@ -3,16 +3,20 @@ import useDateStore from "../../store/useDateStore";
 import { isMonthToday } from "../../util/isDayMonthYearToday";
 
 type CalendarMonthViewProps = {
-  selectMonth: (arg0: number) => void;
-  selectedDate: Date | null;
-  currentDate: Date | null;
+  setIsMonthView: (arg0: boolean) => void;
+  setIsYearView: (arg0: boolean) => void;
 };
 
 const CalendarMonthView = ({
-  selectMonth,
-  currentDate,
-  selectedDate,
+  setIsMonthView,
+  setIsYearView,
 }: CalendarMonthViewProps) => {
+  const { currentDate, setCurrentDate, selectedDate } = useDateStore();
+  const selectMonth = (monthIndex: number) => {
+    setCurrentDate(new Date(currentDate.getFullYear(), monthIndex, 1));
+    setIsMonthView(false);
+    setIsYearView(false);
+  };
   return (
     <div className="month-view">
       {MONTHS_IN_YEAR.map((month, index) => (

@@ -1,18 +1,25 @@
+import useDateStore from "../../store/useDateStore";
 import { isYearToday } from "../../util/isDayMonthYearToday";
 
 type CalendarYearViewProps = {
-  currentDate: Date;
-  selectYear: (arg: number) => void;
-  selectedDate: Date | null;
+  setIsMonthView: (arg: boolean) => void;
+  setIsYearView: (arg: boolean) => void;
 };
 
 const CalendarYearView = ({
-  currentDate,
-  selectYear,
-  selectedDate,
+  setIsMonthView,
+  setIsYearView,
 }: CalendarYearViewProps) => {
+  const { currentDate, setCurrentDate, selectedDate } = useDateStore();
   const years = [];
   const currentYear = currentDate.getFullYear();
+
+  const selectYear = (year: number) => {
+    setCurrentDate(new Date(year, currentDate.getMonth(), 1));
+    setIsYearView(false);
+    setIsMonthView(true);
+  };
+
   for (let i = currentYear - 5; i <= currentYear + 6; i++) {
     years.push(
       <div

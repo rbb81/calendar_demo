@@ -1,29 +1,22 @@
 import useDateStore from "../../store/useDateStore";
-import Button from "../common/Button";
+import Button from "../../components/common/Button";
 
 type CalendarHeaderProps = {
   isYearView: boolean;
   isMonthView: boolean;
   toggleYearView: () => void;
   toggleMonthView: () => void;
-  prevMonth: () => void;
-  prevYear: () => void;
-  currentDate: Date;
-  nextMonth: () => void;
-  nextYear: () => void;
 };
 
 const CalendarHeader = ({
-  prevMonth,
   isYearView,
   isMonthView,
   toggleYearView,
   toggleMonthView,
-  prevYear,
-  currentDate,
-  nextMonth,
-  nextYear,
 }: CalendarHeaderProps) => {
+  const { prevMonth, nextMonth, currentDate, prevYear, nextYear } =
+    useDateStore();
+
   return (
     <div className="header">
       <Button

@@ -1,102 +1,97 @@
-import useDateStore from "../../store/useDateStore";
 import { TOTAL_DAYS } from "../../const/date";
+import { useState } from "react";
 import { isDayToday } from "../../util/isDayMonthYearToday";
 
-const CalendarDays = () => {
-  const { currentDate, setSelectedDate, selectedDate } = useDateStore();
-  console.log(selectedDate);
+type CalendarDaysProps = {
+  currentDate: Date;
+  selectedDate: Date | null;
+  handleDateSelect: (arg: Date) => void;
+};
 
-  const getDays = () => {
-    const days = [];
+const CalendarDays = ({
+  currentDate,
+  selectedDate,
+  handleDateSelect,
+}: CalendarDaysProps) => {
+  const daysInMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
+  const firstDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  ).getDay();
+  const daysInPrevMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    0
+  ).getDate();
 
-    const daysInMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    ).getDate();
+  const days = [];
+  const daysFromPrevMonth = firstDayOfMonth;
+  const daysFromNextMonth = TOTAL_DAYS - (daysFromPrevMonth + daysInMonth);
 
-    const firstDayOfMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    ).getDay();
-
-    const daysInPrevMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      0
-    ).getDate();
-
-    const daysFromPrevMonth = firstDayOfMonth;
-    const daysFromNextMonth = TOTAL_DAYS - (daysFromPrevMonth + daysInMonth);
-
-    // Add previous month's last few days
-    for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
-      const prevMonthDate = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth() - 1,
-        daysInPrevMonth - i
-      );
-      days.push(
-        <div
-          key={`prev-${i}`}
-          className={`day prev-month ${isDayToday(
-            daysInPrevMonth - i,
-            prevMonthDate,
-            selectedDate
-          )}`}
-          onClick={() => setSelectedDate(prevMonthDate)}
-        >
-          {daysInPrevMonth - i}
-        </div>
-      );
-    }
-
-    // Add current month's days
-    for (let i = 1; i <= daysInMonth; i++) {
-      const currentMonthDate = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        i
-      );
-
-      days.push(
-        <div
-          key={i}
-          className={`day ${isDayToday(i, currentMonthDate, selectedDate)}`}
-          onClick={() => setSelectedDate(currentMonthDate)}
-        >
-          {i}
-        </div>
-      );
-    }
-
-    // Add next month's first few days
-    for (let i = 1; i <= daysFromNextMonth; i++) {
-      const nextMonthDate = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-        i
-      );
-      days.push(
-        <div
-          key={`next-${i}`}
-          className={`day next-month ${isDayToday(
-            i,
-            nextMonthDate,
-            selectedDate
-          )}`}
-          onClick={() => setSelectedDate(nextMonthDate)}
-        >
-          {i}
-        </div>
-      );
-    }
-
-    return days;
+  const selectDate = (date: Date) => {
+    handleDateSelect(date);
   };
 
-  return <div className="days">{getDays()}</div>;
+  // Add previous month's last few days
+  for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
+    const prevMonthDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - 1,
+      daysInPrevMonth - i
+    );
+    days.push(
+      <div
+        key={`prev-${i}`}
+        className="day prev-month"
+        onClick={() => selectDate(prevMonthDate)}
+      >
+        {daysInPrevMonth - i}
+      </div>
+    );
+  }
+
+  // Add current month's days
+  for (let i = 1; i <= daysInMonth; i++) {
+    const currentMonthDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      i
+    );
+    days.push(
+      <div
+        key={i}
+        className={`day ${isDayToday(i, currentMonthDate, selectedDate)}`}
+        onClick={() => selectDate(currentMonthDate)}
+      >
+        {i}
+      </div>
+    );
+  }
+
+  // Add next month's first few days
+  for (let i = 1; i <= daysFromNextMonth; i++) {
+    const nextMonthDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      i
+    );
+    days.push(
+      <div
+        key={`next-${i}`}
+        className="day next-month"
+        onClick={() => selectDate(nextMonthDate)}
+      >
+        {i}
+      </div>
+    );
+  }
+
+  return <div className="days">{days}</div>;
 };
 
 export default CalendarDays;

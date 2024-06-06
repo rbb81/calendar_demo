@@ -1,0 +1,20 @@
+.date-picker {
+  position: relative;
+  width: 200px;
+}
+
+.date-picker input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.calendar {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

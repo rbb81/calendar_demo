@@ -1,5 +1,3 @@
-import useDateStore from "../store/useDateStore";
-
 export const isDayToday = (
   i: number,
   currentMonthDate: Date,
@@ -17,29 +15,31 @@ export const isDayToday = (
     : "";
 };
 
-export const isMonthToday = (key: number) => {
-  const { currentDate, selectedDate } = useDateStore();
+export const isMonthToday = (
+  key: number,
+  currentDate: Date | null,
+  selectedDate: Date | null
+) => {
   const today = new Date();
 
   if (
     selectedDate?.getMonth() === key &&
-    selectedDate?.getFullYear() === currentDate.getFullYear()
+    selectedDate?.getFullYear() === currentDate?.getFullYear()
   ) {
     return "selected";
   }
 
   if (
     today.getMonth() === key &&
-    today.getFullYear() === currentDate.getFullYear()
+    today.getFullYear() === currentDate?.getFullYear()
   ) {
     return "date-today";
   }
   return "";
 };
 
-export const isYearToday = (key: number) => {
+export const isYearToday = (key: number, selectedDate: Date | null) => {
   const today = new Date();
-  const { selectedDate } = useDateStore();
   if (selectedDate?.getFullYear() === key) {
     return "selected";
   }
