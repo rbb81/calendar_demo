@@ -1,5 +1,4 @@
 import { MONTHS_IN_YEAR } from "../../const/date";
-import useDateStore from "../../store/useDateStore";
 import { isMonthToday } from "../../util/isDayMonthYearToday";
 
 type CalendarMonthViewProps = {

@@ -1,5 +1,4 @@
 import { TOTAL_DAYS } from "../../const/date";
-import { useState } from "react";
 import { isDayToday } from "../../util/isDayMonthYearToday";
 
 type CalendarDaysProps = {
